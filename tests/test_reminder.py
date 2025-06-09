@@ -1,4 +1,5 @@
-from lib.reminder import *
+from lib.reminder import Reminder
+import pytest
 
 def test_reminds_the_user_to_do_a_task():
     reminder = Reminder("Kay")
@@ -6,4 +7,9 @@ def test_reminds_the_user_to_do_a_task():
     result = reminder.remind()
     assert result == "Walk the dog, Kay!"
 
-# We would typically have a number of these examples.
+def test_reminder_raises_exception():
+    reminder = Reminder("Kay")
+    with pytest.raises(Exception) as e:
+        reminder.remind()
+    error_message = str(e.value)
+    assert error_message == "No reminder set!"
